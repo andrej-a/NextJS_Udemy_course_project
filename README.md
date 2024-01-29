@@ -1,1 +1,0 @@
-# NextJS_Udemy_course_project
