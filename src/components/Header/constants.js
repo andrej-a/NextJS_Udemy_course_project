@@ -1,7 +1,7 @@
 const pathsList = [{
     id: 1,
     path: 'meals',
-    title: 'Meals'
+    title: 'Browse Meals'
 }, {
     id: 2,
     path: 'community',
