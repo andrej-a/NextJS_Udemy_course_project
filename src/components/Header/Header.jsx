@@ -1,11 +1,15 @@
+'use client'
+
 import Link from "next/link";
-import logo from '../../../assets/logo.png'
+import logo from '@/assets/logo.png'
 import pathsList, { CONSTANTS } from "./constants";
 import styles from './header.module.css';
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 
 const Header = () => {
     const { pageTitle } = CONSTANTS;
+    const currentPath = usePathname();
     return (
         <header className={styles.header}>
             <Link className={styles.logo} href='/' >
@@ -16,7 +20,7 @@ const Header = () => {
                 <ul>
                     {pathsList.map(({ path, id, title }) => {
                         return <li key={id}>
-                            <Link href={path}>{title}</Link>
+                            <Link className={currentPath.startsWith(`/${path}`) ? styles.active : ''} href={path}>{title}</Link>
                         </li>
                     })}
                 </ul>
