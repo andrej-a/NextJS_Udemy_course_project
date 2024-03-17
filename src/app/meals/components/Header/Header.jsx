@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import classes from '../../page.module.css';
+import classes from '../../styles/page.module.css';
 
 const Header = () => {
     return (
