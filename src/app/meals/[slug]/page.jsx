@@ -1,10 +1,13 @@
 import Image from 'next/image';
 import classes from './page.module.css';
 import meals_api from '@/api/meals';
+import { notFound } from 'next/navigation';
 
 const Meal = async ({ params }) => {
     const meal = await meals_api.getMealBySlug(params.slug)
-    
+    if (!meal) {
+        notFound();
+    }
     return (
         <>
             <header className={classes.header}>
