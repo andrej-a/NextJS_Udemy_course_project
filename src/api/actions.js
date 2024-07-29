@@ -1,4 +1,8 @@
 'use server'
+
+import { redirect } from "next/navigation";
+import meals_api from "./meals";
+
 export const createMeal = async (formData) => {
     const meal = {
         creator: formData.get('name'),
@@ -8,4 +12,6 @@ export const createMeal = async (formData) => {
         instructions: formData.get('instructions'),
         image: formData.get('image'),
     };
+    await meals_api.createMeal(meal);
+    redirect('/meals');
 }
