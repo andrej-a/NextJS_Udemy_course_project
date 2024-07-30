@@ -1,9 +1,12 @@
 'use server'
-
-import { redirect } from "next/navigation";
+import {
+    redirect
+} from "next/navigation";
 import meals_api from "./meals";
 
-export const createMeal = async (formData) => {
+const keys = ['creator', 'creator_email', 'title', 'summary', 'instructions', 'image'];
+
+export const createMeal = async (previousState, formData) => {
     const meal = {
         creator: formData.get('name'),
         creator_email: formData.get('email'),
@@ -12,6 +15,11 @@ export const createMeal = async (formData) => {
         instructions: formData.get('instructions'),
         image: formData.get('image'),
     };
+    if (keys.some((k) => !meal[k])) {
+        return {
+            message: 'Invalid input!'
+        }
+    }
     await meals_api.createMeal(meal);
     redirect('/meals');
 }

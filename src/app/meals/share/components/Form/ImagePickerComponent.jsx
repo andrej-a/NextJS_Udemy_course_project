@@ -1,4 +1,3 @@
-'use client';
 import { useFormStatus } from 'react-dom';
 import ImagePicker from "@/app/meals/components/Image-Picker/Image-Picker";
 import classes from '../../page.module.css';

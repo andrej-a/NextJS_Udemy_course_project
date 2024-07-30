@@ -1,6 +1,6 @@
 import fs from 'node:fs';
 import sql from 'better-sqlite3';
-import xss from 'xss';
+import { getSlug, getXSSInformation } from '@/utils/utils';
 
 const db = sql('meals.db');
 
@@ -15,7 +15,7 @@ const meals_api = {
     },
     createMeal: async (meal) => {
         const slug = getSlug(meal.title);
-        const instructions = xss(meal.instructions);
+        const instructions = getXSSInformation(meal.instructions);
 
         const extension = meal.image.name.split('.')[1];
         const imageName = `${slug}.${extension}`;
@@ -34,7 +34,7 @@ const meals_api = {
             slug
         };
 
-        await new Promise((resolve) => setTimeout(resolve, 1500));
+        await new Promise((resolve) => setTimeout(resolve, 300));
         return db.prepare(`INSERT INTO meals (title, summary, instructions, creator, creator_email, image, slug) VALUES (
             @title,
             @summary,
